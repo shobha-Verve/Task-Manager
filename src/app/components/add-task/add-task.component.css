@@ -1,0 +1,28 @@
+@import 'ckeditor5/ckeditor5.css';
+
+::ng-deep .mat-mdc-form-field-bottom-align{
+    display: none !important;
+}
+
+
+
+.fa-asterisk{
+    color: #e70808;
+}
+
+.task-form{
+    margin-top: 20px; 
+    margin-left: 0px
+}
+
+.ck-content {
+    height: 100px;
+  }
+
+  .ck-content .image.image_resized img {
+    width: 100%;
+    height: 100%;
+}
+
+  /* ck ck-editor__main */
+  /* ck-blurred ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline  */

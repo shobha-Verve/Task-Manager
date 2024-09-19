@@ -1,0 +1,40 @@
+.navbar{
+    height: 100px;
+}
+
+.search{
+    /* margin-top: 14px; */
+    border-radius: 30px;
+    height: 45px;
+    width: 263px;
+    /* margin-left: 50px; */
+}
+
+/* .navbar-brand{
+    /* margin-left: 70px; */
+    /* font-size: xxx-large; */
+/* } */
+::ng-deep .navbar > .container {
+    display: block;
+}
+.navbar-nav{
+    /* margin-left: 70px; */
+    font-size: 15px
+}
+
+.fa-magnifying-glass {
+    margin-top: 15px;
+    margin-left: -37px;
+    font-size: 18px;
+}
+.fa-xmark {
+    margin-top: 16px;
+    margin-left: -37px;
+}
+
+.btn {
+    border-radius: 20px;
+    font-size: 20px;
+    /* margin-left: 70px; */
+    width: 98px
+}

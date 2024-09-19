@@ -1,0 +1,68 @@
+button {
+    margin-right: 8px;
+}
+
+  .add{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.search{
+  margin-right: 10px;
+  border-radius: 8px;
+}
+.sortA,  .sortD, .edit{
+  color: #0d9c20;
+}
+
+.delete{
+  color: #f01b0c;
+}
+
+.pagination {
+  float: inline-end;
+}
+
+/* ::ng-deep .ngx-pagination .current{
+  background: red !important;
+} */
+
+
+.notFound{
+  width: 100%;
+  text-align: center;
+  float: left;
+  font-size: 16px;
+  padding: 20px 20px 0 20px;
+}
+
+button.close-button {
+  position: absolute;
+  right: 200px;
+  padding-top: 8px;
+  /* top: 50%; */
+  /* transform: translateY(-50%); */
+  border: none;
+  background: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  }
+
+  
+  .active {
+    background-color: rgb(116, 109, 109);
+  }
+  
+  .inactive {
+    background-color: rgb(247, 241, 241);
+  }
+
+  .color-box {
+    border-radius: 50%;
+    height: 100%;
+    margin-right: 10px;
+    border: 1px solid #000;
+  
+  }

@@ -1,0 +1,29 @@
+.main {
+    overflow-x: hidden;
+    overflow-y: hidden;
+   
+}
+
+.viewtask{
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+::ng-deep .mat-mdc-button-touch-target{
+    background-color: rgb(143, 143, 143);
+    border-radius: 5px;
+    height: 40px !important;
+    
+}
+
+.ck-content .image.image_resized img {
+    width: 100%;
+    height: fit-content;
+}
+
+
+::ng-deep img, svg {
+    vertical-align: middle;
+    height: fit-content;
+    width: 50%;
+}

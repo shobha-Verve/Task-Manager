@@ -1,0 +1,98 @@
+<section>
+  <nav class="navbar bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <b class="text-white px-md-2"><i class="fa-solid fa-bars-progress fa-lg p-1"></i>Task Management</b>
+      </a>
+    </div>
+  </nav>
+  <br> <br>
+  <!-- table  -->
+  <div class="container-xl">
+    <div class="table">
+      <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-4">
+              <h4><b><i class="fa-solid fa-list-check fa-lg"></i> Manage Task</b></h4>
+            </div>
+
+            <div class="col-sm-4">
+              <!-- <div class="form-check form-check-inline">
+                <input class="form-check-input" (click)="filterTable('active')" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                <label class="form-check-label" for="inlineRadio1">Active</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" (click)="filterTable('isactive')" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                <label class="form-check-label" for="inlineRadio2">isActive</label>
+              </div> -->
+            </div>
+
+            <div class="col-sm-4 add">
+              <button class="btn btn-success" (click)="addAll()">
+                <i class='fas fa-plus-circle'></i><span> ADD</span>
+              </button>
+
+              <input type="text" class="search" placeholder="search" [(ngModel)]="searchText" name="searchText" />
+              <button type="button" class="close-button" *ngIf="searchText" (click)="clear()">×</button>
+            </div>
+          </div>
+        </div>
+        <table class="table table-striped table-hover table-bordered table-content">
+          <thead>
+            <tr class="text-center">
+              <th>Type</th>
+              <th (click)="check_sort && taskList >1 ? sort('low') :  sort('high')">Assignee User &nbsp;
+                <a *ngIf="taskList >1"><i
+                    [class]="check_sort ? 'fa-solid fa-arrow-down-wide-short sortA' : 'fa-solid fa-arrow-up-wide-short sortD'"></i></a>
+                <!-- <a *ngIf="!check_sort && taskList.length>1"><i class="fa-solid fa-arrow-up-wide-short sortD"></i></a> -->
+              </th>
+              <th>Duration</th>
+              <th>Active</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <!-- {{task.length}} -->
+     
+          <tbody>
+            <tr
+              *ngFor="let task of searchList() |  
+              paginate: { itemsPerPage: 2, 
+                currentPage: p, 
+                totalItems:searchList.length } , 
+                let i=index"
+              class="align-middle text-center">
+              <td>{{ task.selectedTaskType }}</td>
+              <td>{{ task.userName | titlecase }}</td>
+              <td>{{ task.startDate | date:'dd/MM/y' }} - {{task.endDate | date:'dd/MM/y'}}</td>
+              <td class="text-center">{{ task.active ? "Y":"N" }}</td>
+              <td class="align-middle">
+                <a (click)="openDialog(task,'0ms', '0ms');viewTask(task.id)"><i
+                    class="fa-regular fa-eye fa-lg"></i></a>&nbsp;
+                <a (click)="editTask(task.id)"><i class="fa-regular fa-pen-to-square fa-lg edit"></i></a>&nbsp;
+                <a (click)="deleteAlert(task.id, i)"><i class="fa-solid fa-trash-can fa-lg delete"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <a></a>
+          <!-- {{task ==''? "No Record":''}} -->
+
+          <!-- <h4 *ngIf=".length === 0" class="notFound text-dark">{{'No Record Found'}}</h4> -->
+          <span *ngIf="taskList == null || taskList.length == 0 || forSearch.length == 0" class="notFound text-dark">No Record Found</span>
+        </div>
+        <div class="row">
+          <div class="col">
+            <p class="record" *ngIf="forSearch.length != 0">Total Record : {{!searchText ? taskList.length :
+              forSearch.length }}</p>
+          </div>
+          <div class="col" *ngIf="forSearch.length != 0 || taskList.length == 0">
+            <pagination-controls (pageChange)="p = $event" class="pagination"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

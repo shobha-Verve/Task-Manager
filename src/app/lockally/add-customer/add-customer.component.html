@@ -1,0 +1,204 @@
+<section>
+    <nav class="navbar bg-secondary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <b class="text-white px-md-2"><i class="fa-solid fa-user-plus fa-lg p-1"></i>&nbsp;Add Customer</b>
+            </a>
+        </div>
+    </nav>
+
+    <div>
+        <form [formGroup]="form">
+            <div class="row customer-form">
+                <div class="col-md-10 col-xl-10 col-12">
+
+                    <div class="row mb-3 mt-3">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+                            <label for="name" class="control-label">
+                                Name<i class="fa-solid fa-asterisk fa-2xs"></i>
+                            </label>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                            <input type="text" formControlName="name" name="name" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3 mt-3">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+                            <label for="mobile" class="control-label">
+                                Mobile No.<i class="fa-solid fa-asterisk fa-2xs"></i>
+                            </label>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                            <input type="number" formControlName="mobile" name="mobile" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3 mt-3">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+                            <label for="email" class="control-label">
+                                Email<i class="fa-solid fa-asterisk fa-2xs"></i>
+                            </label>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                            <input type="email" formControlName="email" name="email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3 mt-3">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+                            <label for="image" class="control-label">
+                                Image<i class="fa-solid fa-asterisk fa-2xs"></i>
+                            </label>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                            <div class="info-picture">
+                                <input type="file" (change)="fileChangeEvent($event)" />
+
+                                <image-cropper style="width:300px" #cropper [imageChangedEvent]="imageChangedEvent"
+                                    [maintainAspectRatio]="true" [aspectRatio]="desiredRatio"
+                                    (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded($event)"
+                                    (cropperReady)="cropperReady($event)"
+                                    (loadImageFailed)="loadImageFailed($event)"></image-cropper>
+
+                                <img [src]="croppedImage" />
+
+                                <!-- <app-crop-img
+                              [imageChangedEvent]="imageToCrop" 
+                              (done)="onCrop($event)"></app-crop-img>  -->
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 mt-3">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+                                <label for="shopNo" class="control-label">
+                                    Shop No/ Apartment Name<i class="fa-solid fa-asterisk fa-2xs"></i>
+                                </label>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                                <input type="text" formControlName="shopNo" name="shopNo" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 mt-3">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+                                <label for="streetName" class="control-label">
+                                    Street Name<i class="fa-solid fa-asterisk fa-2xs"></i>
+                                </label>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                                <input type="text" formControlName="streetName" name="streetName" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 mt-3">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+                                <label for="country" class="control-label">
+                                    Country<i class="fa-solid fa-asterisk fa-2xs"></i>
+                                </label>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                                <ng-select required [searchable]="true" [clearable]="false" name="country" id="type"
+                                    formControlName="country" placeholder="Select Template" (change)="changeCountry()">
+                                    <ng-option *ngFor="let item of countryListData" [value]="item">
+                                        {{item.name}}
+                                    </ng-option>
+                                </ng-select>
+                                <!-- <input type="text" formControlName="country" name="country" class="form-control"> -->
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3 mt-3">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+                                <label for="state" class="control-label">
+                                    State<i class="fa-solid fa-asterisk fa-2xs"></i>
+                                </label>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                                <ng-select required [searchable]="true" [clearable]="false" (change)="changeState()"
+                                    name="state" id="type" formControlName="state" placeholder="Select Template">
+                                    <ng-option *ngFor="let item of stateListData" [value]="item">
+                                        {{item.name}}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 mt-3">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+                                <label for="city" class="control-label">
+                                    City<i class="fa-solid fa-asterisk fa-2xs"></i>
+                                </label>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                                <ng-select required [searchable]="true" [clearable]="false" (change)="changeCity()"
+                                    name="state" id="type" formControlName="city" placeholder="Select Template">
+                                    <ng-option *ngFor="let item of cityListData" [value]="item">
+                                        {{item.name}}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 mt-3">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+                                <label for="area" class="control-label">
+                                    Area<i class="fa-solid fa-asterisk fa-2xs"></i>
+                                </label>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                                <ng-select required [searchable]="true" [clearable]="false" (change)="changeArea()"
+                                    name="area" id="type" formControlName="area" placeholder="Select Template">
+                                    <ng-option *ngFor="let item of areaListData" [value]="item">
+                                        {{item.name}}
+                                    </ng-option>
+                                </ng-select>
+                                <!-- <input type="text" name="area" formControlName="area" class="form-control"> -->
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 mt-3">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+                                <label for="zipcode" class="control-label">
+                                    Zipcode*<i class="fa-solid fa-asterisk fa-2xs"></i>
+                                </label>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                                <input type="text" formControlName="zipcode" name="zipcode" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 mt-3">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+                                <label for="khata" class="control-label">
+                                    Open khata for Customer<i class="fa-solid fa-asterisk fa-2xs"></i>
+                                </label>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                                <div class="form-check outline-dark">
+                                    <input class="form-check-input border-dark" formControlName="khata" type="checkbox"
+                                        value="" id="khata" checked>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                                <button class="btn btn-dark" routerLink="/manage-customer" type="submit"><i
+                                        class="fa-solid fa-share fa-flip-horizontal"></i> Back</button>&nbsp;
+                                <button class="btn btn-primary" type="submit">Submit<i
+                                        class="fa-solid fa-floppy-disk"></i></button>
+                                <!-- <button class="btn btn-primary" type="submit" (click)="showSuccess()">Submit <i
+                              class="fa-solid fa-floppy-disk"></i></button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+        </form>
+    </div>
+</section>

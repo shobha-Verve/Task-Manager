@@ -1,0 +1,149 @@
+<div class="container-fluid">
+  <div class="row margin-bottom-15px">
+    <nav class="navbar bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <b class="text-white px-md-2" *ngIf="!task_details"><i class="fa-solid fa-user-plus fa-lg"></i>&nbsp; Add Task
+          </b>
+          <b class="text-white px-md-2" *ngIf="task_details"><i class="fa-solid fa-user-pen fa-lg"></i>&nbsp; Edit Task
+          </b>
+        </a>
+      </div>
+    </nav>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="row task-form">
+        <div class="col-md-10 col-xl-10 col-12">
+
+          <div class="row mb-3">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+              <label for="userName" class="control-label">
+                Assignee User<i class="fa-solid fa-asterisk fa-2xs"></i>
+              </label>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+              <ng-select required [searchable]="true" [clearable]="false" name="userName" id="type"
+                formControlName="userName" placeholder="Select User">
+                <ng-option *ngFor="let item of userName" [value]="item.name">
+                  {{item.name}}<{{item.email}}>
+                </ng-option>
+              </ng-select>
+              <div class="text-danger" *ngIf="controlHasError('required', 'userName')">
+                {{ "Assignee User is required" }}
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+              <label for="selectedTaskType" class="control-label">
+                Task Type<i class="fa-solid fa-asterisk fa-2xs"></i>
+              </label>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+              <ng-select required [searchable]="true" [clearable]="false" name="selectedTaskType" id="type"
+                formControlName="selectedTaskType" placeholder="Select Template">
+                <ng-option *ngFor="let item of taskType" [value]="item.name">
+                  {{item.name}}
+                </ng-option>
+              </ng-select>
+              <div class="text-danger" *ngIf="controlHasError('required', 'selectedTaskType')">
+                {{ "Task Type is required" }}
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+              <label for="taskName" class="control-label">
+                Task Name<i class="fa-solid fa-asterisk fa-2xs"></i>
+              </label>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+              <input type="taskName" id="taskName" (click)="disabled()" class="form-control" formControlName="taskName"
+                aria-describedby="passwordHelpInline" placeholder="Task Name" autocomplete="off" required>
+              <div class="text-danger" *ngIf="controlHasError('required', 'taskName')">
+                {{ "Task Name is required" }}
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+              <label for="description" class="control-label">
+                Task Description
+              </label>
+            </div>
+            <div class="col-xl-8 col-lg-8 col-md-8 col-12">
+              <ckeditor [editor]="Editor" [config]="config" formControlName="description"></ckeditor>
+             <!-- <textarea class="form-control" placeholder="Task Description" formControlName="description"
+                  id="exampleFormControlTextarea1" rows="2"></textarea> -->
+
+            </div>
+          </div>
+
+          <!-- <div class="row mb-3">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+              <label for="exampleFormControlFile1">Upload File</label>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+              <input type="file" id="file" name="file" value="File" (change)="onFileChange($event)" accept=".png, .jpeg," required />
+              <div *ngIf="isValidSize" class="text-danger">Invalid file format. Only
+                .doc,.docx,.pdf,.png, .jpeg are allowed.</div>
+              <div *ngIf="isValidType" class="text-danger">
+                File size exceeds the maximum allowed size of 5 MB.';
+              </div>
+            </div>
+          </div> -->
+
+          <div class="row mb-3">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+              <mat-label>Duration<i class="fa-solid fa-asterisk fa-2xs"></i></mat-label>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-date-range-input [rangePicker]="picker" [min]="minEndDate">
+                  <input matStartDate formControlName="startDate" placeholder="Start date">
+                  <input matEndDate formControlName="endDate" placeholder="End date">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+              <div class="text-danger" *ngIf="controlHasError('required', 'startDate')">
+                {{ "Date is required" }}
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row mb-3">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+              <label for="active" class="control-label">
+                Active
+              </label>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+              <div class="form-check outline-dark">
+                <input class="form-check-input border-dark" formControlName="active" type="checkbox" value=""
+                  id="flexCheckChecked" checked>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                <button class="btn btn-dark" routerLink="/task-list" type="submit"><i
+                    class="fa-solid fa-share fa-flip-horizontal"></i> Back</button>&nbsp;
+                <button class="btn btn-primary" type="submit" (click)="showSuccess()">Submit <i
+                    class="fa-solid fa-floppy-disk"></i></button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

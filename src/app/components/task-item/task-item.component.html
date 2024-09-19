@@ -1,0 +1,81 @@
+
+<div class="container-fuild main">
+    <div class="row margin-bottom-15px">
+        <nav class="navbar bg-primary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <b class="text-white px-md-3"><i class="fa-solid fa-circle-info fa-lg"></i>&nbsp; View Task Details</b>
+            </a>
+          </div>
+        </nav>
+       <form action="">
+    
+        <div class="row margin-bottom-15px viewtask" *ngIf="task">
+            <div class="col-md-10 col-xl-10 col-12" (click)="viewTask(task.id)">
+                <div class="row mb-3">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+                       <b>Assignee User:</b> 
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-12" name="userName">
+                        {{task.userName | titlecase}}
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+                       <b>Task Type:</b> 
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-12" name="selectedTaskType">
+                        {{task.selectedTaskType}}
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+                       <b>Start Date:</b>                     
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-12" name="startDate">
+                        {{task.startDate|date:'dd/MM/yyyy'}}
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+                       <b>End Date:</b>                     
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-12" name="endtDate">
+                        {{task.endDate|date:'dd/MM/yyyy'}}
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+                        <b>Task Description:</b>
+                    </div>
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-12" name="description">
+                        <div class="description" [innerHtml]="task.description">
+
+                            <!-- {{task.description}} -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-12">
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                        <!-- <a href="#" routerLink="/task-list" class="btn btn-primary">Back</a> -->
+                       
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-flat-button  mat-dialog-close><i class="fa-solid fa-xmark"></i>Cancel</button>
+  </mat-dialog-actions>
